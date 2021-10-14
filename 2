@@ -1,0 +1,78 @@
+def main():
+    filename1 = input("Enter the path to the first file: ")
+    filename2 = input("Enter the path to the second file: ")
+    inter(filename1,filename2)
+    xor(filename1,filename2)
+    only_first(filename1,filename2)
+
+def open_file(str1):
+    file1 = open(str1,"r")
+    return file1
+
+def first_set(str):
+    file = open_file(str)
+    my_set = set()
+    for line in file:
+        temp = line.strip().split()
+        for word in temp:
+            my_set.add(word)
+    return my_set
+
+
+def second_set(str):
+    file = open_file(str)
+    my_set = set()
+    for line in file:
+        temp = line.strip().split()
+        for word in temp:
+            my_set.add(word)
+    return my_set
+
+def inter(str1,str2):
+    set1 = first_set(str1)
+    set2 = second_set(str2)
+    x = set1&set2
+    length = len(x)
+    temp = ""
+    for word in sorted(x):
+        if word == sorted(x)[-1]:
+            temp+= "and " + word
+        else:
+            temp+= word+", "
+    
+    print("The two files have {} words in common.".format(length))
+    print("These words are as follows: {}.".format(temp))
+
+
+def xor(str1,str2):
+    set1 = first_set(str1)
+    set2 = second_set(str2)
+    x = set1^set2
+    length = len(x)
+    temp = ""
+    for word in sorted(x):
+        if word == sorted(x)[-1]:
+            temp+= "and " + word
+        else:
+            temp+= word+", "
+    
+    print("There are {} words that are only in either file but not both.".format(length))
+    print("These words are as follows: {}.".format(temp))
+
+def only_first(str1,str2):
+    set1 = first_set(str1)
+    set2 = second_set(str2)
+    x = set1-set2
+    length = len(x)
+    temp = ""
+    for word in sorted(x):
+        if word == sorted(x)[-1]:
+            temp+= "and " + word
+        else:
+            temp+= word+", "
+    
+    print("There are {} words that only appear in the first file.".format(length))
+    print("These words are as follows: {}.".format(temp))
+
+if __name__ == "__main__":
+    main()
