@@ -1,0 +1,33 @@
+
+def get_chemical_eq_set_from_string(chemical):
+    chemical_list = []
+    for letter in chemical:
+        if letter.isalpha() == True:
+            chemical_list.append(letter)
+
+    possible_lower = chemical_list[1]
+
+    if possible_lower.islower() == True:
+        new_index = "".join(chemical_list[:2])
+        chemical_list.remove(chemical_list[1])
+        chemical_list[0] = new_index
+
+    my_set = set(chemical_list)
+    return my_set
+
+def main():
+    chemical_eq_1 = input("Input a chemical equation: ")
+    chemical_eq_2 = input("Input another chemical equation: ")
+
+    chemical_eq_set_1 = get_chemical_eq_set_from_string(chemical_eq_1)
+    chemical_eq_set_2 = get_chemical_eq_set_from_string(chemical_eq_2)
+    
+    intersection_set = chemical_eq_set_1 & chemical_eq_set_2
+    intersection_list = sorted(list(intersection_set))
+    intersection_string = ", ".join(intersection_list)
+    print(intersection_string)
+    #for thing in sorted(intersection_set):
+       # print(thing, end = ", ") 
+
+if __name__ == "__main__":
+    main()
